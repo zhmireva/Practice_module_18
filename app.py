@@ -5,11 +5,19 @@ from extensions import APIException, APIConverter
 bot = telebot.TeleBot(TOKEN)
 
 
-@bot.message_handler(commands=['start', 'help'])
-def help(message: telebot.types.Message):
-    text = 'Чтобы начать работу введите комманду боту в следующем формате: \n<имя валюты> \
+@bot.message_handler(commands=['start'])
+def start(message: telebot.types.Message):
+    text = 'Рад тебя приветствовать. Я Бот-Конвертер валют и я могу:  \n- Показать список доступных валют через команду /values ' \
+ '\n- Вывести конвертацию валюты через команду<имя валюты> \
 <в какую валюту перевести> \
-<количество переводимой валюты>\nУвидеть список всех доступных валют:/values'
+<количество переводимой валюты>\n- Напомнить, что я могу через команду /help'
+    bot.reply_to(message, text)
+
+@bot.message_handler(commands=['help'])
+def help(message: telebot.types.Message):
+    text = 'Чтобы начать работу введи комманду боту в следующем формате: \n<имя валюты> \
+<в какую валюту перевести> \
+<количество переводимой валюты>\nЧто бы увидеть список всех доступных валют введи:/values'
     bot.reply_to(message, text)
 
 
